@@ -6,6 +6,7 @@ Created For:
 This Repository is created by Shreyas Sharma for the Phoenix Squadron Swarm Team Club at Concordia Shanghai. Feel free to copy the code / edit and imporvise it! 
 
 What Libraries are Needed: 
+
 - NOTICE: This only works on Python 3.7.8 Make sure you have that installed. This is also only Windows Compadible. 
 - Pygame
 - OpenCV-Python
@@ -15,6 +16,7 @@ What Libraries are Needed:
 - Mediapipe
 
 For an easy installation of all:
+
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple robomaster
 
 
