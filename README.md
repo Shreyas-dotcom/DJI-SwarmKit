@@ -17,6 +17,6 @@ What Libraries are Needed:
 
 For an easy installation of all:
 
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple robomaster
+`pip install -i https://pypi.tuna.tsinghua.edu.cn/simple robomaster`
 
 
