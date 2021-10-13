@@ -1,0 +1,30 @@
+# For Phoenix Squadron
+# Active and verified as of October 2021 - For Phoenix Squadron Drones
+# By Marcus Chu & Shreyas Sharma
+
+"""
+
+Phoenix Squadron Serial Numbers & Alphanumericals
+Valid as of October 2021
+
+
+Drone 0:
+Drone 1: sn:0TQZJ9PCNT16Z4, ip:('192.168.1.113', 8889)
+Drone 2: sn:0TQZJ9PCNT16NG, ip:('192.168.1.112', 8889)
+Drone 3: sn:0TQZJ9PCNT16R0, ip:('192.168.1.111', 8889)
+Drone 4: sn:0TQZJ9PCNT16BN, ip:('192.168.1.110', 8889)
+Drone 5: sn:0TQZJ9PCNT16P2, ip:('192.168.1.109', 8889)
+Drone 6: sn:0TQZJ9PCNT16WU, ip:('192.168.1.107', 8889)
+Drone 7: sn:0TQZJ9PCNT16NB, ip:('192.168.1.105', 8889)
+Drone 8: sn:0TQZJ9PCNT16ND, ip:('192.168.1.106', 8889)
+Drone 9: sn:0TQZJ9PCNT16XW, ip:('192.168.1.100', 8889)
+
+_____________________________________________________
+
+Drone 11: sn:0TQZGATED001A8, ip:('192.168.1.114', 8889) - Tello EDU #4
+Drone 12: sn:0TQZGATED001E1, ip:('192.168.1.115', 8889)
+
+\
+
+
+"""
