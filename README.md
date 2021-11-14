@@ -3,7 +3,9 @@ This is a GitHub Repository about the DJI Robomaster TT Swarm Kit ( Only availab
 NOTICE: This only works on Python 3.7.8 Make sure you have that installed. This is also only Windows Compadible. 
 
 Created For: 
-This Repository is created by Shreyas Sharma for the Phoenix Squadron Swarm Team Club at Concordia Shanghai. Feel free to copy the code / edit and imporvise it! 
+This Repository is created by Shreyas Sharma for the Phoenix Squadron Swarm Team Club at Concordia Shanghai.  We will be posting the code to all of our shows here. Our mission is to bring Drone Technology to all around the world - Starting small, but aiming big. We look forward to inspiring thousands with our Drone Shows. Please feel free to make changes, edit, imporve, and copy any of the code listed here. 
+
+
 
 What Libraries are Needed: 
 
@@ -20,3 +22,4 @@ For an easy installation of all:
 `pip install -i https://pypi.tuna.tsinghua.edu.cn/simple robomaster`
 
 
+Feel free to visit our Website! [phoenixsquadron.concordiashanghai.org]
