@@ -1,0 +1,195 @@
+from multi_robomaster import multi_robot
+import threading
+import time
+import multiprocessing
+from robomaster import flight
+
+
+
+robot_sn_list = ['0TQZJ9PCNT16Z4', '0TQZH94CNT03F6', '0TQZJ7LCNT101Q', '0TQZJ7LCNT0YRQ']
+
+
+def base_action_1(robot_group): # the wave & takeoff sequence
+    robot_group.set_mled_char("r", "heart")
+    robot_group.set_led_breath()
+    time.sleep(3)
+    robot_group.takeoff().wait_for_completed()
+    robot_group.set_led(0, 255, 0)
+    robot_group.down(40).wait_for_completed()
+    robot_group.up(100).wait_for_completed()
+    robot_group.down(40).wait_for_completed()
+    robot_group.up(50).wait_for_completed()
+    robot_group.down(60).wait_for_completed()
+    robot_group.up(60).wait_for_completed()
+    robot_group._custom_drone_command({0: "0 0 100 50 m1",
+                                       1: "0 0 100 50 m2",
+                                       2: "0 0 100 50 m3",
+                                       3: "0 0 100 50 m4"},
+                                      "go {0}")
+    robot_group._dispatcher.wait_for_completed()
+    print('action 1 nominal')
+
+
+
+def base_action_2(robot_group): # moving on to the mat
+    robot_group.backward(10)
+    print('action 2 nominal')
+
+
+def base_action_3(robot_group): # MLED CISS formations
+    robot_group.set_mled_sc()
+    robot_group.set_led(255, 0, 0)
+    robot_group.set_led(0, 255, 0)
+    robot_group.up(50).wait_for_completed()
+    #robot_group.backward(70).wait_for_completed()
+    robot_group._custom_drone_command({0:'S',
+                                       1:'S',
+                                       2:'I',
+                                       3:'C',}, "EXT mled s r {0}")
+    robot_group._dispatcher.wait_for_completed()
+    time.sleep(5)
+    print('action 3 nominal')
+
+
+
+def base_action_4(robot_group): # setting up the square
+    robot_group.mission_pad_on()
+    robot_group._custom_drone_command({0: "75 -75 150 50 m1",
+                                       1: "-75 0 150 50 m2",
+                                       2: "-75 0 150 50 m3",
+                                       3: "75 75 150 50 m4"},
+                                      "go {0}")
+    robot_group._dispatcher.wait_for_completed()
+    robot_group.down(30).wait_for_completed()
+    print('action 4 nominal')
+
+#all spiral up
+def base_action_5(robot_group): # making the curve
+    robot_group._dispatcher.wait_for_completed()
+    print('action 5 nominal')
+    robot_group.set_mled_sc()
+    robot_group.set_led_breath()
+
+
+
+def base_action_6(robot_group):
+    robot_group.flip_forward().wait_for_completed()
+    robot_group.flip_backward().wait_for_completed()
+
+    #robot_group.land().wait_for_completed()
+    robot_group.set_led(0, 255, 0) # in cyan
+    print('action 6 nominal')
+
+def base_action_12(robot_group):
+
+    for i in range(3):
+        robot_group._custom_drone_command({0: "EXT led 0 255 0",
+                                           1: "EXT led 255 0 0",
+                                           2: "EXT led 0 255 0",
+                                           3: "EXT led 255 0 0"},
+                                          "{0}")
+        robot_group._dispatcher.wait_for_completed()
+
+
+        robot_group._custom_drone_command({0: "EXT led 255 0 0",
+                                           1: "EXT led 0 255 0",
+                                           2: "EXT led 255 0 0",
+                                           3: "EXT led 0 255 0"},
+                                          "{0}")
+        robot_group._dispatcher.wait_for_completed()
+
+        print("should flash", i)
+
+    print("section 12 nominal")
+
+
+def base_action_7(robot_group):
+    robot_group._custom_drone_command({0: "-30 150 100 50 m1",
+                                       1: "-30 100 100 50 m2",
+                                       2: "-30 -100 100 50 m3",
+                                       3: "-30 -150 100 50 m4"},
+                                      "go {0}")
+    robot_group._dispatcher.wait_for_completed()
+    robot_group.set_mled_sc()
+    robot_group.set_led(0, 0, 0)
+
+    robot_group._custom_drone_command({0: "EXT led 0 255 0",
+                                       1: "EXT led 0 0 0",
+                                       2: "EXT led 0 0 0",
+                                       3: "EXT led 0 0 0"},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    robot_group._custom_drone_command({0: "land",
+                                       1: "",
+                                       2: "",
+                                       3: ""},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    time.sleep(1)
+    robot_group._custom_drone_command({0: "EXT led 0 255 0",
+                                       1: "EXT led 0 255 0",
+                                       2: "EXT led 0 0 0",
+                                       3: "EXT led 0 0 0"},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    robot_group._custom_drone_command({0: "land",
+                                       1: "land",
+                                       2: "",
+                                       3: ""},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    time.sleep(1)
+    robot_group._custom_drone_command({0: "EXT led 0 255 0",
+                                       1: "EXT led 0 255 0",
+                                       2: "EXT led 0 255 0",
+                                       3: "EXT led 0 0 0"},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    robot_group._custom_drone_command({0: "land",
+                                       1: "land",
+                                       2: "land",
+                                       3: ""},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    time.sleep(1)
+    robot_group._custom_drone_command({0: "EXT led 0 255 0",
+                                       1: "EXT led 0 255 0",
+                                       2: "EXT led 0 255 0",
+                                       3: "EXT led 0 255 0"},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    robot_group._custom_drone_command({0: "land",
+                                       1: "land",
+                                       2: "land",
+                                       3: "land"},
+                                      "{0}")
+    robot_group._dispatcher.wait_for_completed()
+    print("section 7 nominal")
+
+
+
+
+
+# Do not edit - no changes required
+if __name__ == '__main__':
+
+    multi_drone = multi_robot.MultiDrone()
+    multi_drone.initialize(robot_num=4)
+
+    multi_drone.number_id_by_sn([0, robot_sn_list[0]], [1, robot_sn_list[1]], [2, robot_sn_list[2]], [3, robot_sn_list[3]])
+
+    multi_drone_group1 = multi_drone.build_group([0, 1, 2, 3])
+    multi_drone_group2 = multi_drone.build_group([1])
+
+# making the order
+    multi_drone.run([multi_drone_group1, base_action_1])
+    multi_drone.run([multi_drone_group1, base_action_2])
+    multi_drone.run([multi_drone_group1, base_action_3])
+    multi_drone.run([multi_drone_group1, base_action_4])
+    multi_drone.run([multi_drone_group1, base_action_5])
+    multi_drone.run([multi_drone_group1, base_action_6])
+    multi_drone.run([multi_drone_group1, base_action_12])
+    multi_drone.run([multi_drone_group1,base_action_7])
+# multi_drone.run([multi_drone_group1, base_action_X])
+    multi_drone.close()
+
